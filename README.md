@@ -13,6 +13,7 @@
 
 # 📜 Index
 ### <a href="#indexWeek1">📝 1 주차 내용 정리</a>
+### <a href="#indexWeek2">📝 2 주차 내용 정리</a>
 
 
 
@@ -88,58 +89,68 @@ SSR, SSG, ISR을 지원합니다.
 각 플랫폼, 하드웨어 성능별로 이미지 최적화를 지원합니다.
 
 다국어를 지원합니다.
-<!--
-<< 참조 >>
--->
 
 
 
 
-<!-- 준비내용 -->
-<!--
-관련 정보: 없음
--->
-<!--
-### <a href="#indexWeek2">📝 2 주차 내용 정리</a>
-### <a href="#indexWeek3">📝 3 주차 내용 정리</a>
-### <a href="#indexWeek4">📝 4 주차 내용 정리</a>
-### <a href="#indexWeek5">📝 5 주차 내용 정리</a>
-### <a href="#indexWeek6">📝 6 주차 내용 정리</a>
-### <a href="#indexWeek7">📝 7 주차 내용 정리</a>
-### <a href="#indexWeek8">📝 8 주차 내용 정리</a>
-### <a href="#indexWeek9">📝 9 주차 내용 정리</a>
-### <a href="#indexWeek10">📝 10 주차 내용 정리</a>
-### <a href="#indexWeek11">📝 11 주차 내용 정리</a>
-### <a href="#indexWeek12">📝 12 주차 내용 정리</a>
-### <a href="#indexWeek13">📝 13 주차 내용 정리</a>
-### <a href="#indexWeek14">📝 14 주차 내용 정리</a>
-### <a href="#indexWeek15">📝 15 주차 내용 정리</a>
+# 📝 2 주차 내용 정리<a href="#indexWeek2"></a>
+> 프로젝트를 생성하기 위해 개발 환경을 설정하고 프로젝트를 생성하는 방법과 Next.js의 라우팅 방식 2가지에 대해 작성합니다.
 
-# 📝 2 주차 내용 정리<a id="indexWeek2"></a>
-# 📝 3 주차 내용 정리<a id="indexWeek3"></a>
-# 📝 4 주차 내용 정리<a id="indexWeek4"></a>
-# 📝 5 주차 내용 정리<a id="indexWeek5"></a>
-# 📝 6 주차 내용 정리<a id="indexWeek6"></a>
-# 📝 7 주차 내용 정리<a id="indexWeek7"></a>
-# 📝 8 주차 내용 정리<a id="indexWeek8"></a>
-# 📝 9 주차 내용 정리<a id="indexWeek9"></a>
-# 📝 10 주차 내용 정리<a id="indexWeek10"></a>
-# 📝 11 주차 내용 정리<a id="indexWeek11"></a>
-# 📝 12 주차 내용 정리<a id="indexWeek12"></a>
-# 📝 13 주차 내용 정리<a id="indexWeek13"></a>
-# 📝 14 주차 내용 정리<a id="indexWeek14"></a>
-# 📝 15 주차 내용 정리<a id="indexWeek15"></a>
--->
+### 프로젝트 생성
+Next.js 프로젝트를 생성하기 위해선 Node.js와 npm을 설치해야합니다. Node.js를 설치하면 npm도 같이 설치됩니다.
 
+Windows 사용자의 경우 일일이 웹을 통하여 프로그램을 설치하는 것이 번거롭다면 chocolatey를 이용하여 Linux처럼 명령어로 설치할 수 있습니다. num과 같은 node 버전을 변경할 수 있는 버전 관리자와 같은 유용한 기능도 쉽게 설치하며 일반적인 VS Code와 같은 응용 프로그램도 터미널 명령어로 설치할 수 있습니다.
 
+```
+npx-create-next-app <프로젝트명>
+```
+
+Node.js 설치가 완료되었다면 이제 위와 같이 터미널 명령어를 통하여 쉽게 프로젝트를 생성할 수 있습니다.
+
+만약 -4058 에러가 발생했다면 React-App 최초 설치 시 설치 관련 npm 파일들이 없는 것이기 때문에 ```npm install -g create-react-app``` 명령어로 설치한 후 생성합니다. ```-g```는 global 옵션입니다.
+
+<div align="center">
+    <img src="imageREADME//imageCreateNextApp.png" width="400">
+</div>
+
+프로젝트명의 경우 작성하지 않으면 터미널에서 따로 프로젝트명을 작성할 수 있게 안내합니다. TypeScript 사용 유무와 같은 옵션의 경우도 함께 설정할 수 있습니다.'
+
+1번째 안내 메시지는 생성할 Next.js 앱의 버전과 이름을 확인합니다.
+
+그 후 첫 번째 체크 사항은 프로젝트 이름을 설정합니다.
+
+두 번째 체크 사항은 TypeScript의 사용 유무를 결정합니다.
+
+세 번째 체크 사항은 ESLint의 사용 유무를 결정합니다. ECMAScript의 오류를 검증하는 도구이지만 상세히 다루지 않겠습니다.
+
+네 번째 체크 사항은 Tailwind CSS로 부트스트랩 프레임워크와 비슷한 기능을 하는 도구입니다. 마찬가지로 상세히 다루지 않습니다.
+
+다섯 번째 체크 사항은 사용자의 취향에 따라 정리하여 관리하고 싶을 때 src 폴더를 생성하여 관리할 지 여부를 결정합니다.
+
+여섯 번째 체크 사항은 앱 라우터의 사용 유무를 결정합니다. 사용하지 않을 시 페이지 라우터를 사용하게 됩니다. 앱 라우터와 페이지 라우터의 자세한 내용은 후술합니다.
 
 
-<!-- 이모티콘 -->
-<!--
-관련 정보:
-(https://emoji-copy.com/ko/)
--->
-<!--
-예시:
-없음
--->
+
+
+### 라우팅 방식
+라우터란 외부 사용자가 도메인을 통해 접속하였을 때 루트 경로로부터 개발자가 제작한 페이지들을 관리하고 연결 및 지정시켜주는 역할을 합니다.
+
+Next.js에는 크게 2가지 라우팅 방식이 있습니다. 페이지 라우팅 방식과 앱 라우팅 방식이 있는데 현재는 앱 라우팅 방식으로 넘어가는 추세입니다.
+
+<div align="center">
+    <img src="imageREADME/imagePageRouter.png" width="300">
+</div>
+
+우선 페이지 라우팅은 기본 루트 페이지가 pages 폴더 안에 있는 index.js가 됩니다. 만약 second라는 페이지를 만들어 연결하고 싶다면 second라는 이름을 가진 폴더를 생성하고 그 안에 해당 경로(도메인/second)로 이동했을 때 기본으로 출력할 index.js를 생성해야 합니다.
+
+그후 ```<code className={styles.code}>~~~~</code>``` 태그를 찾아 주소에 맞게 수정해주면 됩니다.
+
+<div align="center">
+    <img src="imageREADME/imageAppRouter.png" width="300">
+</div>
+
+다음으로 앱 라우팅 방식은 페이지 라우팅 방식과 다르게 기본 루트 페이지가 app(src폴더를 생성했다면 src/app) 폴더 안의 page.js가 됩니다.
+
+페이지 라우터와 비슷한 방식으로 "도메인주소/about"이라는 주소에 페이지를 연결하고 싶다면 about이라는 폴더를 생성한 후 index.js를 대신할 page.js를 생성하면 됩니다.
+
+이후 페이지 라우터와 마찬가지로 ```<code className={styles.code}>~~~~</code>``` 태그를 찾아 주소에 맞게 수정해주면 됩니다.
