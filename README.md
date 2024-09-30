@@ -218,11 +218,57 @@ SSG는 전체 페이지를 빌드 시점에 렌더링합니다. 따라서 사용
 # 📝 4 주차 내용 정리<a id="indexWeek4"></a>
 > Next.js의 라우팅 방식과 동적 라우팅 규칙 및 경로 매개 변수를 작성합니다.
 ### 라우팅 방식
+Next.js는 기본적으로 page 라우팅 방식(파일 시스템 기반 페이지)과 앱 라우팅 방식을 사용합니다.
+
+<div align="center">
+    <img src="imageREADME/imagePageRouter.png" width="300">
+</div>
+
+우선 페이지 라우팅 방식은 라우팅의 루트 페이지가 pages 디렉토리의 index.js 에서 시작됩니다.
+
+두 번째 페이지를 연결하고 싶다면 새 디렉토리를 만들어 경로 이름을 지정하고, index.js 페이지를 만들어 출력합니다.
+
+URL 에 ```도메인주소/second```를 입력하면 두 번째 페이지가 출력됩니다.
+
+<div align="center">
+    <img src="imageREADME/imageAppRouter.png" width="300">
+</div>
+
+앱 라우팅 방식은 루트 디렉토리가 app 디렉토리의 page.js 입니다.
+
+index.js 대신 page.js 를 사용하고, 나머지는 같은 방식으로 이루어져 있습니다.
+
+URL 에 ```도메인주소/about```을 입력하면 두 번째 페이지가 출력됩니다.
 
 
 
-### 동적 라우팅 규칙
+### 동적 라우팅 규칙과 경로 매개 변수
+동적 라우팅 규칙은 URL 주소에 컴포넌트 props 를 넣어 전달할 수 있습니다.
 
+<div align="center">
+    <img src="imageREADME/imageDynamicRouter.png" width="300">
+</div>
 
+앱 라우팅 방식에서 위 그림과 같이 app 디렉토리 안에 test-routing 디렉토리가 있고 그 안에는 ```[id]```라는 디렉토리가 있으며, 각 디렉토리에는 page.jsx 가 존재합니다.
 
-### 경로 매개 변수
+여기서 ```[id]```는 경로 매개변수가 되며 URL 주소에 ```도메인주소/test-routing/Daelim-123``` 이라고 입력하면 ```test-routing``` 디렉토리 안에 ```[id]```라는 이름의 경로 매개변수에 ```Daelim-123```이라는 값이 넘어갑니다.
+
+```jsx
+export default function Id(props) {
+    console.log(props);
+    return (
+        <>
+            {/* 동적 라우팅으로의 params 중 [id] 값 */}
+            <h1>Hello, {props.params.id}!!</h1>
+            {/* 직접 전달 / ?country=korea URL의 제일 뒤에만 가능 */}
+            <h1>Your Country: {props.searchParams.country}</h1>
+        </>
+    );
+}
+```
+
+```[id]``` 디렉토리 안의 page.jsx 의 내용을 위와 같이 설정해주면 화면에는 ```Hello, Daelim-123!!```이라는 내용이 출력됩니다.
+
+또한 직접 URL 에 ```도메인주소/test-routing/Daelim-123?country=Korea``` 로 경로 변수를 직접 사용할 수 있습니다.
+
+하지만 반드시 마지막 경로 변수로 사용해야하며 URL 에 변수 이름과 같이 민감한 정보가 유출될 수 있습니다.
