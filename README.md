@@ -16,6 +16,7 @@
 ### <a href="#indexWeek2">📝 2 주차 내용 정리</a>
 ### <a href="#indexWeek3">📝 3 주차 내용 정리</a>
 ### <a href="#indexWeek4">📝 4 주차 내용 정리</a>
+### <a href="#indexWeek5">📝 5 주차 내용 정리</a>
 
 
 
@@ -272,3 +273,87 @@ export default function Id(props) {
 또한 직접 URL 에 ```도메인주소/test-routing/Daelim-123?country=Korea``` 로 경로 변수를 직접 사용할 수 있습니다.
 
 하지만 반드시 마지막 경로 변수로 사용해야하며 URL 에 변수 이름과 같이 민감한 정보가 유출될 수 있습니다.
+
+
+
+
+# 📝 5 주차 내용 정리<a id="indexWeek5"></a>
+> 동적 라우팅 규칙에 대하여 앱 라우팅과 페이지 라우팅 방식으로 나누어 작성합니다.
+### 페이지 라우팅
+<div align="center">
+    <img src="imageREADME/imagePageRouter.png" width="300">
+</div>
+
+페이지 라우팅은 전술했듯 index.js 가 라우팅의 기본이 되며, pages 폴더 안의 index.js 에서 시작합니다.
+
+새로운 경로를 연결하고 싶다면 위 그림과 같이 second 라는 디렉토리를 생성한 후 디렉토리 안에 index.js 파일을 만들어 라우팅합니다.
+
+<div align="center">
+    <img src="imageREADME/imageDynamicPage.png" width="300">
+</div>
+
+동적 라우팅을 하기 위해선 디렉토리 이름을 ```[]```로 감싸줍니다. URL 에 ```도메인주소/router/sample@gmail.com```을 입력하면 email 이라는 동적 매개 변수에 sample@gmail.com 이라는 값이 전달됩니다.
+
+```jsx
+import { useRouter } from "next/router";
+
+export default function Email() {
+const router = useRouter();
+const { email, id, name } = router.query;
+console.log(router);
+
+return (
+<>
+<h1>Hello, this is Email Page.</h1>
+<h1>이메일 : {email}</h1>
+<h1>아이디 : {id}</h1>
+<h1>이름 : {name}</h1>
+</>
+);
+}
+```
+
+동적 매개 변수를 사용할 때에는 페이지 라우터에선 useRouter 를 사용합니다. 라우터 변수를 선언한뒤 query 메서드를 이용하여 동적 매개 변수를 전달받습니다.
+
+```[...변수이름]```을 사용한다면 동적 매개 변수를 배열의 형태로 전달받습니다. URL 주소에 ```도메인주소/router/sample1/sample2/sample3```로 입력한다면 email 이라는 동적 매개 변수에 sample1 ,sample2, sample3이 0, 1, 2번째 인덱스로 전달됩니다.
+
+위 방법은 한 가지 문제가 있는데 URL 주소를 ```도메인주소/router/```까지만 입력한다면 404 오류를 발생시킵니다. router 디렉토리에 만들어 놓은 컴포넌트 역시 라우팅하고 싶다면 ```[[...변수이름]]```를 사용하여 email 동적 매개 변수를 optional 설정하여 null 값으로도 지정받을 수 있게 해야합니다.
+
+마지막으로 GET 방식으로 변수를 전달할 수 있습니다. 라우팅 후 마지막으로 ```?name=user1&id=sample``` 등으로 직접 id와 name 에 경로 변수를 전달합니다.
+
+
+
+### 앱 라우팅
+<div align="center">
+    <img src="imageREADME/imageAppRouter.png" width="300">
+</div>
+
+앱 라우팅 방식은 페이지 라우팅 방식과 유사하나, 약간의 차이가 있습니다.
+
+우선 페이지 라우팅과 마찬가지로 라우팅을 위해선 새 디렉토리를 만들어야하며 index.js 대신 page.js 를 만들어야 합니다. 여기서 페이지 라우팅 방식과의 차이는 앱 라우팅은 반드시 page.js 가 존재해야 합니다.
+
+마찬가지로 위 그림과 같을 때 ```도메인주소/about```을 입력하면 선택한 page.js 가 출력됩니다.
+
+<div align="center">
+    <img src="imageREADME/imageDynamicApp.png" width="300">
+</div>
+
+동적 라우팅 역시 비슷한데 페이지 라우팅과 같은 구조로 이루어지지만 페이지 라우팅의 경우 디렉토리가 아닌 파일도 동적 매개 변수로 만들 수 있지만 앱 라우팅은 오직 디렉토리 파일만 동적매개변수로 정할 수 있습니다.
+
+```jsx
+export default function Name(props) {
+  console.log(props);
+
+  return (
+    <>
+      <h1>이름 : {props.params.name}</h1>
+      <h1>이메일 : {props.searchParams.email}</h1>
+      <h1>아이디 : {props.searchParams.id}</h1>
+    </>
+  );
+}
+```
+
+또 다른 차이점은 앱 라우팅은 useRouter 를 사용하지 않으며 props 를 사용하여 ```{props.params.동적매개변수이름}```을 통해 동적 변수를 전달받습니다.
+
+또한 GET 방식을 이용한 URL 경로 변수를 받을 때에는 ```{props.searchParams.경로변수이름}```을 통해 경로 변수를 전달받습니다.
