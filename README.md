@@ -17,6 +17,7 @@
 ### <a href="#indexWeek3">📝 3 주차 내용 정리</a>
 ### <a href="#indexWeek4">📝 4 주차 내용 정리</a>
 ### <a href="#indexWeek5">📝 5 주차 내용 정리</a>
+### <a href="#indexWeek6">📝 6 주차 내용 정리</a>
 
 
 
@@ -357,3 +358,45 @@ export default function Name(props) {
 또 다른 차이점은 앱 라우팅은 useRouter 를 사용하지 않으며 props 를 사용하여 ```{props.params.동적매개변수이름}```을 통해 동적 변수를 전달받습니다.
 
 또한 GET 방식을 이용한 URL 경로 변수를 받을 때에는 ```{props.searchParams.경로변수이름}```을 통해 경로 변수를 전달받습니다.
+
+
+
+
+# 📝 6 주차 내용 정리<a id="indexWeek6"></a>
+> 라우터에 있어 레이아웃을 설정하는 방법과 링크 방법, 정적 자원을 사용하는 방법에 대해 작성합니다.
+### 레이아웃
+<div align="center">
+    <img src="imageREADME/imageLayoutPage.png" width="300">
+</div>
+
+페이지 레이아웃의 경우 document.js 와 App.js 를 통해 레이아웃을 구현합니다.
+
+```jsx
+import { Html, Head, Main, NextScript } from "next/document";
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
+App.js는 컴포넌트의 근본이 되는 컴포넌트로 이 컴포넌트의 출력에 
+
+Document.js 의 구성은 위 코드와 같으며, 컴포넌트의 출력으로 일반적인 HTML 의 시멘틱 구조를 갖추고 있습니다.
+
+각각의 태그 안에 외부 컴포넌트를 import 하여 레이아웃 형태를 갖출 수 있습니다.
+
+
+
+
+### 링크
+
+
+
+### 정적 자원 제공
