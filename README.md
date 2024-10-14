@@ -479,3 +479,44 @@ export default function() {
 
 
 ### 🖼 정적 자원 제공
+정적 자원은 이미지, 폰트, 아이콘, 컴파일한 css 또는 js 파일과 같이 동적으로 변하지 않는 모든 종류의 파일입니다.
+
+대부분 public 폴더에 올려 사용합니다.
+
+<div align="center">
+    <img src="imageREADME/imageCLS.png" width="500">
+</div>
+
+일반적으로 최적화 되지 않은 이미지를 사용하게 되면 누적 레이아웃 이동(CLS)이 발생합니다.
+
+이미지를 너무 늦게 불러와 사용자가 이미 비교적 빨리 로드된 콘텐츠들을 사용하는 도중 이미지 로드가 완료되면서 콘텐츠의 위치가 바뀌어버리는 현상입니다.
+
+또한 늦게 로드되는 컴포넌트가 누적될수록 변경되는 위치는 더욱 커질 수 밖에 없습니다.
+
+Next.js 에서는 이미지 최적화 기능을 사용하여 이미지를 WebP 파일 형식으로 포맷하여 제공합니다.
+
+```jsx
+module.exports = {
+    images: {
+        domains: ['images.unsplash.com']
+    }
+}
+```
+
+next.config.js 파일에서 다음과 같은 코드를 입력하여 Unsplash 에서 이미지 최적화 기능을 제공할 수 있게 설정합니다.
+
+```jsx
+export default function IndexPage() {
+    return (
+      <div>
+          <Image
+              src='이미지 주소'
+              width={500}
+              height={200}
+              alt='image'
+          />
+      </div>    
+    );
+}
+```
+그 후 Image 컴포넌트를 이용하여 위의 예시와 같이 이미지를 삽입할 수 있습니다.
