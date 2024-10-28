@@ -18,6 +18,8 @@
 ### <a href="#indexWeek4">📝 4 주차 내용 정리</a>
 ### <a href="#indexWeek5">📝 5 주차 내용 정리</a>
 ### <a href="#indexWeek6">📝 6 주차 내용 정리</a>
+### <a href="#indexWeek7">📝 7 주차 내용 정리</a>
+### <a href="#indexWeek8">📝 8 주차 내용 정리</a>
 
 
 
@@ -520,3 +522,130 @@ export default function IndexPage() {
 }
 ```
 그 후 Image 컴포넌트를 이용하여 위의 예시와 같이 이미지를 삽입할 수 있습니다.
+
+
+
+
+# 📝 7 주차 내용 정리<a id="indexWeek7"></a>
+> 이미지를 최적화하는 방법과 디렉토리 구조에 대해 작성합니다.
+### 이미지 최적화
+<div align="center">
+    <img src="imageREADME/imageCLS.png" width="500">
+</div>
+
+정적 자원은 이미지, 폰트, 아이콘, 컴파일한 CSS 또는 JS 파일과 같이 동적으로 변하지 않는 모든 파일을 뜻합니다.
+
+Next.js 에서는 이미지 최적화 기능을 통해 CLS(누적 레이아웃 이동)를 방지합니다. 또 이미지를 WebP와 같은 최신 이미지 포맷으로 제공합니다. 만약 사용자의 브라우저가 WebP 를 지원하지 않을 경우 사용자의 브라우저에 맞추어 이미지를 포맷합니다.
+
+```jsx
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+        reactStrictMode: true,
+        images: {
+            remotePatterns: [
+                {
+                    protocol: "https",
+                    hostname: "cdn.pixabay.com",
+                },
+                {
+                    protocol: "https",
+                    hostname: "images.unsplash.com",
+                },
+            ],
+        },
+    };
+
+export default nextConfig;
+
+```
+
+next.config.js 파일에 설정을 추가함으로써 이미지 최적화를 수행할 수 있습니다. ```cdn.pixababy.com``` 과 ```images.unsplash.com```에서 링크를 받아오는 이미지 태그들은 이미지 최적화 기능을 제공합니다.
+
+
+
+### 디렉터리 구조
+Next.js 에서는 특정 파일과 디렉터리가 지정된 위치에 있어야 합니다. 레이아웃을 설정하는 layout.js 파일과 같은 것들이 해당됩니다.
+
+루트 디렉토리
+* ```node_modules/``` -  Next.js 프로젝트의 의존성 패키지를 설치하는 디렉터리입니다. 흔히 ```$ npm install``` 명령어로 패키지를 설치할 때 이 폴더 안에 설치됩니다.
+* ```app/``` - 앱 라우터 프로젝트의 라우팅 시스템을 만드는 디렉터리입니다. 이 디렉터리 안의 page.js 파일이 앱 라우팅의 루트가 됩니다. 
+* ```public/``` - 컴파일된 css 및 js 파일, 이미지 아이콘 등 정적 자원들을 저장하고 제공하는 디렉터리입니다.
+* ```styles/``` - 스타일링 모듈을 저장하는 디렉터리입니다.
+
+아토믹 디자인 원칙
+1. atoms - 원자와 같이 더 이상 쪼갤 수 없을 정도의 가장 기본적인 컴포넌트 입니다. 표준 HTML 요소를 감싸는 용도로 사용됩니다.
+2. molecules - atoms 에 속한 컴포넌트들을 조합하여 컴포넌트를 만듭니다.
+3. organisms - molecules 와 atoms 를 조합하여 복잡한 구조의 컴포넌트를 만듭니다.
+4. templates - 위 3가지 atoms, molecules, organisms 를 조합하여 사용자가 접근할 수 있는 페이지를 만듭니다.
+
+유틸리티 파일은 렌더링하는 컴포넌트가 없는 코드 파일입니다. 유틸리티 스크립트라고 하며 로직 수행 등 다양한 용도로 사용됩니다. 이러한 유틸리티 파일 역시 ```utilities/``` 디렉토리 아래에 패키지와 같이 용도에 맞게 묶어 분류합니다.
+
+정적 자원은 ```public/``` 디렉터리 아래 ```assets/``` 디렉터리를 만들어 정적 파일의 유형별로 묶어 관리합니다.
+
+
+
+
+# 📝 8 주차 내용 정리<a id="indexWeek8"></a>
+> Rest API 를 호출하는 방법애 대해 작성합니다.
+
+REST API 는 자원을 이름(key)으로 구분하여 자원 상태(value)를 통신하는 방법을 따르는 API 입니다. 흔히 json 데이터 형식을 이용하여 통신합니다.
+
+* URI - Uniform Resource Identifier. 리소스 자원을 식별자를 뜻합니다.
+* URL - Uniform Resource Location. 리소스 자원의 위치를 뜻합니다.
+
+HTTP Methods 에는 GET, POST, DELETE, PUT, PATCH 등이 있으며 CRUD 에 있어 아래와 같이 사용합니다.
+* Create - POST
+* Read - GET
+* Update- PUT, PATCH
+* Delete - DELETE
+
+REST API 에도 네이밍 컨벤션이 존재하며 아래와 같습니다.
+* 동사보단 명사를 사용합니다.
+* path 와 혼동되지 않게 "/" 로 끝내지 않습니다.
+* 단어 연결 시 하이폰(-)을 사용합니다.
+* 확장자(.jpg 등)는 URI 에 포함시키지 않습니다.
+* HTTP Methods 는 혼동될 수 있으므로 URI 에 포함시키지 않습니다.
+
+Json server
+```shell
+$ npm install -g json-server
+$ json-server ~파일이름~ --port ~포트번호~
+```
+
+위 명령어를 통해 json 서버를 설치하고 json 데이터 파일과 포트번호를 지정하여 json 서버를 실행시킵니다.
+
+서버에서 REST API 를 호출하는 방법은 크게 두 가지로 나뉩니다. 첫 번째는 Node.js 의 내장 HTTP 라이브러리(fetch())를 사용하는 것이고, 두 번째는 HTTP 클라이언트 라이브러리(Axios)를 사용하는 방법입니다.
+
+
+
+### fetch-API
+```jsx
+let testData = await fetch("https://api.vercel.app/blog");
+let testPosts = await testData.json();
+```
+fetch-api 는 브라우저에 내장되어 있어 별도로 설치하지 않아도 됩니다.
+
+Promise 기반으로 비동기로 작업을 처리합니다.
+
+데이터 스트리밍 처리가 가능하여 큰 파일을 처리할 때 유용합니다.
+
+하지만 위 코드와 같이 json 을 직접 변환하여 사용해야합니다.
+
+
+
+### Axios
+Axios 는 HTTP 클라리언트 라이브러리로 ```$ npm install axios``` 명령어를 통해 따로 설치해야합니다.
+
+```jsx
+const res = await axios.get("http://localhost:3001/test");
+const users = res.data;
+const status = res.status(); 
+const headers = res.headers();
+const conf = res.conf();
+```
+
+json 데이터를 자동으로 변환해주기 때문에 json 데이터에 쉽게 접근할 수 있습니다.
+
+HTTP 요청 도중 취소할 수 있고, 요청 / 응답을 가로채어 수정할 수 있습니다.
+
+HTTP 상태 코드에 따라 더 세분화하여 오류를 처리할 수 있습니다.
