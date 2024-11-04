@@ -532,7 +532,7 @@ export default function IndexPage() {
 
 # 📝 7 주차 내용 정리<a id="indexWeek7"></a>
 > 이미지를 최적화하는 방법과 디렉토리 구조에 대해 작성합니다.
-### 이미지 최적화
+### 🖼 이미지 최적화
 <div align="center">
     <img src="imageREADME/imageCLS.png" width="500">
 </div>
@@ -567,7 +567,7 @@ next.config.js 파일에 설정을 추가함으로써 이미지 최적화를 수
 
 
 
-### 디렉터리 구조
+### 📁 디렉터리 구조
 Next.js 에서는 특정 파일과 디렉터리가 지정된 위치에 있어야 합니다. 레이아웃을 설정하는 layout.js 파일과 같은 것들이 해당됩니다.
 
 루트 디렉토리
@@ -622,7 +622,7 @@ $ json-server ~파일이름~ --port ~포트번호~
 
 
 
-### fetch-API
+### 🔍 fetch-API
 ```jsx
 let testData = await fetch("https://api.vercel.app/blog");
 let testPosts = await testData.json();
@@ -637,7 +637,7 @@ Promise 기반으로 비동기로 작업을 처리합니다.
 
 
 
-### Axios
+### 🔎 Axios
 Axios 는 HTTP 클라리언트 라이브러리로 ```$ npm install axios``` 명령어를 통해 따로 설치해야합니다.
 
 ```jsx
@@ -658,6 +658,117 @@ HTTP 상태 코드에 따라 더 세분화하여 오류를 처리할 수 있습�
 
 
 # 📝 9 주차 내용 정리<a id="indexWeek9"></a>
-> 
+> CSS 와 내장 스타일링 메서드에 대해 작성합니다.
 
-p.145 시작
+Next.js 에서 CSS 를 적용하는 방법엔 크게 2가지로 나뉩니다. Next.js 에서 기본 내장되어있는 CSS 모듈을 사용하는 방법과 SASS 패키지를 설치하여 사용하는 방법입니다.
+
+### 💾 내장 패키지 사용
+```jsx
+<span>Span Tag</span>
+<button className="button">클릭</button>
+<style jsx>{`
+.button {
+    padding: 1em;
+    border-radius: 15px;
+    border: none;
+    background: purple;
+    color: white;
+}
+span {
+    background: yellow;
+    font-weight: bold;
+}
+`}</style>
+```
+
+Styled JSX 는 css-in-JS 라이브러리로 CSS 속성을 지정할 때 자바스크립트를 사용할 수 있습니다.
+
+위 코드와 같이 ```.button``` 으로 클래스를, ```span```으로 태그를 지정하여 css 를 적용할 수 있습니다.
+
+```<style jsx>``` 태그에 global 을 붙여 ```<style jsx global>```로 만들어 글로벌 css 로 사용할 수 있지만 통상 글로벌 css 는 layout 이나 한 곳에 모아 사용하므로 이 사용은 지양합니다.
+
+styled 를 사용하게 되면 IDE, 개발 도구에서 지원이 부족한 경우가 종종 있습니다.(문법 하이라이팅, 자동 완성 기능, 린팅) 또한 CSS 에 대한 의존성이 커지기도 합니다. 또한 리액트 하이드레이션이 끝나면 css 를 또 다시 생성해야합니다. 이런 방식으로 계속 진행하면 서버 부하가 매우 부담될 수 있습니다.
+
+```css
+.page {
+    --gray-rgb: 0, 0, 0;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+    --button-primary-hover: #383838;
+    --button-secondary-hover: #f2f2f2;
+
+    display: grid;
+    grid-template-rows: 20px 1fr 20px;
+    align-items: center;
+    justify-items: center;
+    min-height: 100svh;
+    padding: 80px;
+    gap: 64px;
+    font-family: var(--font-geist-sans);
+    
+    .className {
+        color: green;
+        background: red;
+    }
+
+    .otherClassName {
+        composes: className;
+        color: yellow;
+    }
+}
+```
+
+```jsx
+import styles from "./page.module.css";
+```
+
+두 번째 방법인 CSS Module 파일을 만들어 사용함으로써 해결할 수 있습니다. ```~css 파일 이름~.module.css``` 파일을 만들어 그 안에 css 규칙을 생성하고, 사용할 컴포넌트 jsx 페이지에서 import 하여 사용합니다.
+
+또한 ```composes``` 키워드를 이용하여 셀렉터 컴포지션 기능으로 정의해놓은 속성을 그대로 가져와 적용시킬 수 있습니다.
+
+만약 global css 로 사용하고 싶다면 ```app/``` 디렉토리의 ```layout.js``` 페이지에서 import 하여 사용하면 됩니다.
+
+```css
+.page:global {
+    --gray-rgb: 0, 0, 0;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+    --button-primary-hover: #383838;
+    --button-secondary-hover: #f2f2f2;
+
+    display: grid;
+    grid-template-rows: 20px 1fr 20px;
+    align-items: center;
+    justify-items: center;
+    min-height: 100svh;
+    padding: 80px;
+    gap: 64px;
+    font-family: var(--font-geist-sans);
+}
+```
+두 번째 방법은 위 코드와 같이 ```:global``` 키워드를 붙여 사용하는 것인데, 전술했듯이 global css 는 모아 사용하는 것이 좋습니다.
+
+
+
+### 📦 외부 패키지 SASS 사용
+```shell
+$ npm install sass
+```
+CSS 전처리기인 SASS 를 사용할 수 있습니다. 위 명령어를 통해 SASS 를 설치합니다.
+
+```~css 파일이름~.module.scss``` 파일을 만들어 사용합니다.
+
+자세한 문법은 [공식 사이트](https://sass-lang.com/)를 참고합니다.
+
+```scss
+$color: rgb(44, 0, 102);
+
+.myDiv {
+  font-size: 50px;
+  color: $color;
+}
+```
+
+SASS 의 특징이라고 한다면 css 속성을 변수처럼 만들어 사용할 수 있습니다. 위와 같이 ```$```를 이용하여 css 변수를 생성한 후 일반적인 css 규칙과 마찬가지로 속성에 css 변수를 넣어 사용할 수 있습니다.
