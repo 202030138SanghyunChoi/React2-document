@@ -24,6 +24,7 @@
 ### <a href="#indexWeek7">📝 7 주차 내용 정리</a>
 ### <a href="#indexWeek8">📝 8 주차 내용 정리</a>
 ### <a href="#indexWeek9">📝 9 주차 내용 정리</a>
+### <a href="#indexWeek10">📝 10 주차 내용 정리</a>
 
 
 
@@ -772,3 +773,183 @@ $color: rgb(44, 0, 102);
 ```
 
 SASS 의 특징이라고 한다면 css 속성을 변수처럼 만들어 사용할 수 있습니다. 위와 같이 ```$```를 이용하여 css 변수를 생성한 후 일반적인 css 규칙과 마찬가지로 속성에 css 변수를 넣어 사용할 수 있습니다.
+
+
+
+
+# 📝 10 주차 내용 정리<a id="indexWeek10"></a>
+> Next.js 에서 자주 사용되는 UI 프레임워크 3가지에 대해 작성합니다.
+
+### ༄ Tailwind
+
+대부분의 UI 프레임워크와 달리 Tailwind CSS 는 오직 CSS 규칙만 제공합니다.
+
+대표적인 특징은 다음과 같습니다.
+* 프레임워크 독립성 - CSS 규칙이기 때문에 Next.js 나 React 뿐만 아니라 순수한 HTML 및 자바스크립트에서 사용할 수 있습니다.
+* 고유 테마 - Tailwind CSS 변수값을 조절하여 본인만의 디자인을 제작할 수 있습니다.
+* 밝은 / 어두운 테마 지원 - CSS 클래스를 수정해서 라이트 / 다크 테마를 쉽게 적용할 수 있습니다.
+* 높은 수준의 최적화 - 빌드 시점에서 사용하지 않는 클래스가 제거되기 때문에 최종 번들의 크기가 줄어듭니다.
+* 모바일 지원 - 모바일, 데스크톱, 테블릿 화면에서 원하는 규칙을 지정할 수 있습니다.
+
+최근에는 ```$ npx create-next-app``` 명령어 입력 시 옵션으로 Tailwind CSS 를 선택할 수 있습니다.
+
+이미 생성한 프로젝트에 추가할 경우 아래와 같이 설치합니다.(최신 설치 방법은 홈페이지를 참고합니다.)
+
+```shell
+$ npm install -D tailwindcss
+$ npx tailwindcss init
+```
+
+위 명령어를 통해 Tailwind CSS 를 설치하고, ```tailwind.config.js``` 파일을 생성합니다.
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+생성한 ```tailwind.config.js``` 파일에 위와 같이 작성합니다.
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+글로벌 css 파일에 tailwind 를 추가합니다.
+
+```shell
+npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+```
+
+위 명령어를 통해 CLI 가 입력되는 코드들을 CSS 로 컴파일 및 빌드시킵니다.
+
+```tsx
+export default function TailWind() {
+  return (
+    <>
+      <div className="bg-white">
+        <header className="absolute inset-x-0 top-0 z-50">
+          <nav
+            className="flex items-center justify-between p-6 lg:px-8"
+            aria-label="Global"
+          >
+            <div className="flex lg:flex-1">
+              <a href="#" className="-m-1.5 p-1.5">
+                <span className="sr-only">Your Company</span>
+                <img
+                  className="h-8 w-auto"
+                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+                  alt=""
+                />
+              </a>
+            </div>
+            .....(생략)
+          </nav>
+        </header>
+      </div>
+    </>
+  );
+}
+```
+
+그 후 위 코드와 같이 css 처럼 사용할 수 있습니다. tailwind CSS 는 html 형태로 제공되는 경우가 많기 때문에 Next.js 나 React 에서 사용할 경우 코드 리팩터링이 필요합니다.
+
+
+
+### 🙃 Headless
+Tailwind CSS 는 웹 컴포넌트 안에서 사용할 수 있는 CSS 클래스만 제공합니다. 따라서 동적 컴포넌트를 만들려면 직접 자바스크립트 코드를 작성해야합니다.
+
+Headless UI 는 CSS 클래스나 스타일로 만들지 않고 동적 컴포넌트만을 이용하여 제작합니다.
+
+```$ npm install @headless/react``` 명령어를 통해 Next.js 나 React 프로젝트에 headless 를 설치합니다.
+
+```tsx
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import {
+  ArchiveBoxXMarkIcon,
+  ChevronDownIcon,
+  PencilIcon,
+  Square2StackIcon,
+  TrashIcon,
+} from "@heroicons/react/16/solid";
+export default function HeadLessUI() {
+    return (
+        <div className="fixed top-24 w-52 text-right">
+            <Menu>
+                <MenuButton
+                    className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                    Options
+                    <ChevronDownIcon className="size-4 fill-white/60"/>
+                </MenuButton>
+                ...(생략)
+            </Menu>
+        </div>
+    )
+}
+```
+
+그 후 위와 같이 import 를 통해 동적 컴포넌트들을 포함 시킨 후 일반적인 React 컴포넌트 처럼 사용할 수 있습니다.
+
+
+
+### 🌀 Chakra UI
+Chakra UI는 오픈 소스 컴포넌트 라이브러리로 모듈화되고 접근성이 뛰어납니다.
+
+크게 5가지 특징이 있습니다.
+* 접근성 - 버튼, 모달, input 과 같은 다양한 내장 컴포넌트를 제공하여 접근성이 쉽습니다.
+* 테마 - 기본 배경색이나 패딩 등과 같은 기본 테마를 제공합니다.
+* 라이트 / 다크 테마 - 시스템 설정에 따라 라이트 / 다크 테마를 적용합니다.
+* 조합 - 제공되는 기본적인 컴포넌트들을 조합하여 더 다양하고 많은 컴포넌트를 제작할 수 있습니다.
+* 타입스크립트 지원 - 타입스크립트로 작성되어 휴먼 에러를 보완합니다.
+
+```$ npm install @chakraui/react @emotion/react``` 명령어를 통해 Next.js 나 React 프로젝트에 ChakraUI 를 설치합니다. emotion 도 함께 설치해야 합니다.
+
+```npx @chakra-ui/cli snippet add``` 명령어를 통해 CLI 도구를 snippet 에 추가합니다.
+
+프로젝트 폴더에 /components/ui 폴더가 생성되고 다양한 컴포넌트들이 생성됩니다.
+
+```tsx
+import { Provider } from "@/components/ui/provider";
+<Provider>{children}</Provider>
+```
+
+ChakraUI 를 사용할 때는 Provider 를 사용하여 layout.js 파일에 ```{children}``` 을 감싸 global CSS 로 등록합니다.
+
+next.config.mjs 에 experimental 을 아래 코드와 같이 설정합니다.
+
+```mjs
+experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  }
+```
+
+
+
+### 😀 React-Icon
+추가로 [React-Icon](https://react-icons.github.io/react-icons/) 사이트에서 여러가지 아이콘들을 추가할 수 있습니다.
+
+따로 별도 패키지 설치 필요 없이 해당 사이트에서 코드만 복사하여 import 하면 됩니다.
+
+```
+import { FcLinux } from "react-icons/fc";
+
+export default function ReactIcons() {
+  return (
+    <>
+      <FcLinux size={100} />
+    </>
+  );
+}
+```
+
+위 코드와 같이 복사하 import 코드를 import 하고, 일반 컴포넌트와 같이 사용할 수 있습니다.
+
+<div align="center">
+    <img src="imageREADME/imageReactIcon.png" width="100">
+</div>
