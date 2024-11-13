@@ -26,6 +26,8 @@
 ### <a href="#indexWeek9">📝 9 주차 내용 정리</a>
 ### <a href="#indexWeek10">📝 10 주차 내용 정리</a>
 ### <a href="#indexWeek11">📝 11 주차 내용 정리</a>
+### <a href="#indexWeek12">📝 12 주차 내용 정리</a>
+### <a href="#indexWeek15">📝 15 주차 내용 정리</a>
 
 
 
@@ -592,6 +594,12 @@ Next.js 에서는 특정 파일과 디렉터리가 지정된 위치에 있어야
 
 
 # 📝 8 주차 내용 정리<a id="indexWeek8"></a>
+> 중간 고사
+
+
+
+
+# 📝 9 주차 내용 정리<a id="indexWeek9"></a>
 > Rest API 를 호출하는 방법애 대해 작성합니다.
 
 REST API 는 자원을 이름(key)으로 구분하여 자원 상태(value)를 통신하는 방법을 따르는 API 입니다. 흔히 json 데이터 형식을 이용하여 통신합니다.
@@ -659,7 +667,7 @@ HTTP 상태 코드에 따라 더 세분화하여 오류를 처리할 수 있습�
 
 
 
-# 📝 9 주차 내용 정리<a id="indexWeek9"></a>
+# 📝 10 주차 내용 정리<a id="indexWeek10"></a>
 > CSS 와 내장 스타일링 메서드에 대해 작성합니다.
 
 Next.js 에서 CSS 를 적용하는 방법엔 크게 2가지로 나뉩니다. Next.js 에서 기본 내장되어있는 CSS 모듈을 사용하는 방법과 SASS 패키지를 설치하여 사용하는 방법입니다.
@@ -778,7 +786,7 @@ SASS 의 특징이라고 한다면 css 속성을 변수처럼 만들어 사용�
 
 
 
-# 📝 10 주차 내용 정리<a id="indexWeek10"></a>
+# 📝 11 주차 내용 정리<a id="indexWeek11"></a>
 > Next.js 에서 자주 사용되는 UI 프레임워크 3가지에 대해 작성합니다.
 
 ### ༄ Tailwind
@@ -958,5 +966,11 @@ export default function ReactIcons() {
 
 
 
-# 📝 11 주차 내용 정리<a id="indexWeek11"></a>
+# 📝 12 주차 내용 정리<a id="indexWeek12"></a>
 p.127
+
+
+
+
+# 📝 15 주차 내용 정리<a id="indexWeek15"></a>
+> 기말 고사
