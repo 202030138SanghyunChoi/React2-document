@@ -967,7 +967,87 @@ export default function ReactIcons() {
 
 
 # 📝 12 주차 내용 정리<a id="indexWeek12"></a>
-p.127
+> 리액트에서 Props 를 전송하는 방법과 Context API 를 사용하는 방법을 작성합니다.
+### 🗃 Props
+<div align="center">
+    <img src="imageREADME/imagePropsDrilling.png" width="400">
+</div>
+
+React 에서 Props 는 기본적으로 단방향으로 흘러가기 때문에 Props Drilling 이 발생합니다.
+
+Props Drilling 은 컴포넌트 트리에서 데이터를 하위 컴포넌트로 전달하기 위해 중간 컴포넌트를 통해서 Property 를 전달하는 것을 말합니다.
+
+단방향으로 값이 전달되기 때문에 자식 컴포넌트는 부모 컴포넌트에게 값을 넘길 수 없습니다.
+
+Props Drilling 으로 인해 명시적으로 값을 사용하고 값을 추적하기도 수월하지만 반대로 중간 컴포넌트에 불필요한 Property 를 전달할 때도 있고, 필요 이상으로 코드가 길어질 수 있습니다.
+
+위와 같은 문제점을 Context API 와 Redux 와 같은 상태 관리 라이브러리를 사용하여 해결할 수 있습니다.
+
+
+
+### ⚛ Context API
+Context API 는 리액트 버전 16.3 부터 사용 가능한 API 입니다.
+
+전역으로 사용하여 특정 컨텍스트 내의 모든 컴포넌트 간에 데이터를 공유할 수 있습니다.
+
+다른 컴포넌트에 속성값 형태로 데이터를 전달할 필요도 없고 자식 컴포넌트가 부모 컴포넌트에게 데이터를 공유할 수도 있습니다.
+
+컨텍스트 파일들은 /src 디렉토리에 따로 /contexts 디렉토리를 생성하여 함께 모아 관리하는 것이 좋습니다.
+
+```jsx
+// createContext, useState 등을 사용하기 위해 use client 필요
+"use client";
+import { createContext, useEffect, useState } from "react";
+
+// 컨텍스트 생성
+const ThemeContext = createContext();
+
+// 테마를 적용할 컴포넌트들을 감싸는 태그
+export const ThemeProvider = ({ children }) => {
+  // 테마 변수
+  const [theme, setTheme] = useState("light");
+
+  // 테마 변경 함수
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  // 테마 변경 시 body class name 변경
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  // 컨텍스트의 Provider 에 theme 와 toggleTheme 전송
+  return (
+    <ThemeContext.Provider value={ {theme, toggleTheme } }>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export default ThemeContext;
+```
+
+컨텍스트 파일에 위 코드와 같이 ```const ThemeContext = createContext();``` 를 통해 컨텍스트를 생성합니다.
+
+```
+<ThemeContext.Provider value={ {theme, toggleTheme } }>
+    {children}
+</ThemeContext.Provider>
+```
+
+그 후 위와 같이 컨텍스트의 Provider 를 통해 데이터를 전달합니다.
+
+```jsx
+import { useContext } from "react";
+import ThemeContext from "@/contexts/ThemeContext";
+
+const ThemeToggleButton = () => {
+    const {theme, toggleTheme} = useContext(ThemeContext);
+};
+```
+
+그 다음 아래와 같이 다른 컴포넌트에서 import 해당 컨텍스트를 import 한 후, useContext 를 이용하여 데이터를 전역에서 사용할 수 있습니다.
 
 
 
