@@ -27,6 +27,7 @@
 ### <a href="#indexWeek10">📝 10 주차 내용 정리</a>
 ### <a href="#indexWeek11">📝 11 주차 내용 정리</a>
 ### <a href="#indexWeek12">📝 12 주차 내용 정리</a>
+### <a href="#indexWeek13">📝 13 주차 내용 정리</a>
 ### <a href="#indexWeek15">📝 15 주차 내용 정리</a>
 
 
@@ -1048,6 +1049,12 @@ const ThemeToggleButton = () => {
 ```
 
 그 다음 아래와 같이 다른 컴포넌트에서 import 해당 컨텍스트를 import 한 후, useContext 를 이용하여 데이터를 전역에서 사용할 수 있습니다.
+
+
+
+
+# 📝 13 주차 내용 정리<a id="indexWeek13"></a>
+> p.129
 
 
 
