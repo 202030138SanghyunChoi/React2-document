@@ -28,6 +28,7 @@
 ### <a href="#indexWeek11">📝 11 주차 내용 정리</a>
 ### <a href="#indexWeek12">📝 12 주차 내용 정리</a>
 ### <a href="#indexWeek13">📝 13 주차 내용 정리</a>
+### <a href="#indexWeek14">📝 14 주차 내용 정리</a>
 ### <a href="#indexWeek15">📝 15 주차 내용 정리</a>
 
 
@@ -1184,6 +1185,12 @@ export default function CounterProvider({ children }) {
 ```
 
 store 가 영향을 끼칠 컴포넌트 범위를 지정하기 위해 /store 디렉토리에 Provider 를 생성합니다. layout.js 나 컴포넌트 내에서 해당 Provider 로 감싸준 범위 내에서 해당 전역 상태를 관리할 수 있습니다.
+
+
+
+
+# 📝 14 주차 내용 정리<a id="indexWeek14"></a>
+> p.239
 
 
 
